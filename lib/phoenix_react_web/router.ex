@@ -14,13 +14,12 @@ defmodule PhoenixReactWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # scope "/", PhoenixReactWeb do
-  #   pipe_through :browser
+  scope "/", PhoenixReactWeb do
+    pipe_through :browser
 
-  #   get "/", PageController, :home
-  # end
+    get "/", PageController, :home
+  end
 
-  # Other scopes may use custom stacks.
   scope "/auth", PhoenixReactWeb.Auth, as: :api do
     pipe_through :api
 

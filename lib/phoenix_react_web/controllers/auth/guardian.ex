@@ -57,7 +57,6 @@ defmodule PhoenixReactWeb.Auth.Guardian do
     {:ok, account, token}
   end
 
-
   defp token_options(type) do
     case type do
       :access -> [token_type: "access", ttl: {2, :hour}]

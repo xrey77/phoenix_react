@@ -25,7 +25,9 @@ config :phoenix_react, PhoenixReactWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "nADdBx6PoMxs2YKGg37xT+VseA4x2/qLJZlr2RqqaUJbKcjtOgTpMMZnXY1Z0+Ye",
-  watchers: []
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:phoenix_react, ~w(--sourcemap=inline --watch)]},
+  ]
 
 # ## SSL Support
 #

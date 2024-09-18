@@ -1,13 +1,9 @@
 defmodule PhoenixReactWeb.Auth.AccountController do
   use PhoenixReactWeb, :controller
-  alias PhoenixReact.{Accounts, Accounts.Account}
+  alias PhoenixReact.{Accounts}
 
   action_fallback PhoenixReactWeb.FallbackController
 
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, :index, users: users)
-  end
 
   def register(conn, %{"account" => account_params}) do
     if Accounts.get_account_by_email(account_params["emailadd"]) do
@@ -19,7 +15,7 @@ defmodule PhoenixReactWeb.Auth.AccountController do
       else
 
           if Accounts.create_account(account_params) do
-            conn |> json([%{statuscode: 201, message: "You account has been successfully created", account: account_params["emailadd"]}])
+            conn |> json([%{statuscode: 201, message: "You account has been created successfully..", account: account_params["emailadd"]}])
           else
             conn |> json([%{statuscode: 400, message: "Unable to create account"}])      
           end
@@ -60,24 +56,4 @@ defmodule PhoenixReactWeb.Auth.AccountController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    account = Accounts.get_account!(id)
-    render(conn, :show, account: account)
-  end
-
-  def update(conn, %{"id" => id, "account" => account_params}) do
-    account = Accounts.get_account!(id)
-
-    with {:ok, %Account{} = account} <- Accounts.update_account(account, account_params) do
-      render(conn, :show, account: account)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    account = Accounts.get_account!(id)
-
-    with {:ok, %Account{}} <- Accounts.delete_account(account) do
-      send_resp(conn, :no_content, "")
-    end
-  end
 end

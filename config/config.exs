@@ -43,6 +43,19 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :esbuild,
+  version: "0.17.11",
+  phoenix_react: [
+    args:
+      ~w(js/app.jsx --bundle --target=es2022 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
+
 # config :guardian, Guardian.DB,
 #   repo: PhoenixReact.Repo,
 #   schema_name: "guardian_tokens",
