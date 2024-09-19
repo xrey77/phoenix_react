@@ -12,9 +12,11 @@ const Signin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [disable, setDisable] = useState(false);
 
     const submitLogin = (event: any) => {
         event.preventDefault();
+        setDisable(true);
         const data =JSON.stringify({ emailadd: username, password: password });        
         api.post("/auth/signin", data)
            .then((res: any) => {
@@ -28,6 +30,7 @@ const Signin = () => {
                     setMessage("")
                     window.location.href="/"    
                 } else {
+                    setDisable(false)
                     setMessage("")
                     setUsername("")
                     setPassword("")
@@ -35,6 +38,7 @@ const Signin = () => {
             }, 4000);
     
         }, (error: any) => {
+            setDisable(false)
             setMessage(error.message);            
         });
     }
@@ -55,10 +59,10 @@ const Signin = () => {
             <div className="modal-body">
                 <form onSubmit={submitLogin} autoComplete="false">
                   <div className="mb-3">
-                    <input type="email" value={username} onChange={e => setUsername(e.target.value)} required className="form-control" id="usrname" placeholder="enter Email Address"/>
+                    <input type="email" disabled={disable} value={username} onChange={e => setUsername(e.target.value)} required className="form-control" id="usrname" placeholder="enter Email Address"/>
                   </div>                    
                   <div className="mb-3">
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} required className="form-control" id="passwd" placeholder="enter Password"/>
+                    <input type="password" disabled={disable} value={password} onChange={e => setPassword(e.target.value)} required className="form-control" id="passwd" placeholder="enter Password"/>
                   </div>                    
                   <div className="mb-3">
                     <button type="submit" className="btn btn-success">signin</button>

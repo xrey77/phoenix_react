@@ -6,6 +6,7 @@ import "../../../css/app.css";
 
 const Navmenu = () => {
     let username: any = sessionStorage.getItem("USERNAME");
+    let userpic: any = sessionStorage.getItem("USERPIC")
 
     const signout = () => {
       sessionStorage.removeItem("USERNAME")
@@ -49,7 +50,14 @@ const Navmenu = () => {
 
               <li className="nav-item dropdown  user-left">
                 <a className="nav-link dropdown-toggle" href="#/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span><img className="user" src="/images/userx.png" alt=""/>&nbsp;</span><span>{username}</span>
+                  {
+                    userpic === null ?
+                        <span><img className="user" src="/images/userx.png" alt=""/></span>
+                    :
+                        <span><img className="user" src={userpic} alt=""/></span>
+                  }
+
+                  &nbsp;<span>{username}</span>
                 </a>
                 <ul className="dropdown-menu">
                   <li><a onClick={signout} className="dropdown-item" href="#/">Logout</a></li>
@@ -106,12 +114,17 @@ const Navmenu = () => {
           {
             username !== null ?
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span><img className="user" src="/images/userx.png" alt=""/></span>&nbsp; <span>{username}</span>
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">                            
+              {
+                  userpic === null ?
+                      <span><img className="user" src="/images/userx.png" alt=""/></span>
+                  :
+                      <span><img className="user" src={userpic} alt=""/></span>
+              }
+              &nbsp; <span>{username}</span>
               </a>
               <ul className="dropdown-menu">
                 <li data-bs-dismiss="offcanvas"><a onClick={signout} className="dropdown-item" href="#/">Logout</a></li>
-                <li><a className="dropdown-item" href="#">Product 2</a></li>
                 <li data-bs-dismiss="offcanvas"><Link className="dropdown-item" to={'/profile'}>Profile</Link></li>
                 <li><hr className="dropdown-divider"/></li>
                 <li data-bs-dismiss="offcanvas"><a className="dropdown-item" href="#/">Messenger</a></li>

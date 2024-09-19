@@ -53,6 +53,7 @@ defmodule PhoenixReact.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:guardian, "~> 2.3"},
       {:guardian_db, "~> 2.0"},
+      {:mogrify, "~> 0.9.3"},
     ]
   end
 

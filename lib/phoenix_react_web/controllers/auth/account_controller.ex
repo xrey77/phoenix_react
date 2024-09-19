@@ -11,11 +11,11 @@ defmodule PhoenixReactWeb.Auth.AccountController do
     else
 
       if Accounts.get_account_by_username(account_params["username"]) do
-        conn |> json([%{statuscode: 400, message: "Username has already taken."}])      
+        conn |> json([%{statuscode: 400, message: "User name has already taken."}])      
       else
 
           if Accounts.create_account(account_params) do
-            conn |> json([%{statuscode: 201, message: "You account has been created successfully..", account: account_params["emailadd"]}])
+            conn |> json([%{statuscode: 201, message: "Your account has been created successfully...", account: account_params["emailadd"]}])
           else
             conn |> json([%{statuscode: 400, message: "Unable to create account"}])      
           end
@@ -30,7 +30,7 @@ defmodule PhoenixReactWeb.Auth.AccountController do
       {:ok, account, token} ->
         conn
         |> json([%{statuscode: 201,
-                  message: "Your profile has been successfully retrieved..",
+                  message: "You have successfully logged in, pls wait.",
                   id: account.id,
                   firstname: account.firstname,
                   lastname: account.lastname,
@@ -39,7 +39,7 @@ defmodule PhoenixReactWeb.Auth.AccountController do
                   role: account.role,
                   otp: account.qrcode,
                   token: token}])
-      {:error, :no_content} -> conn |> json(%{statuscode: 400, message: "Invalid Credentials."})
+      {:error, :no_content} -> conn |> json(%{statuscode: 400, message: "Invalid Credentials, pls try again."})
     end
   end
 

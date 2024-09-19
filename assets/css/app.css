@@ -20,6 +20,23 @@
  }
 
  .user {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+ }
+
+ .profile-width {
+    margin: auto;
+    width: 80%!important;
+ }
+
+ .user-profile {
+    width: 100px!important;
+    height: 100px!important;
+ }
+
+ .qrcode {
+    width: 200px!important;
+    height: 200px!important;
+    opacity: 0.2;
  }
